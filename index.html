@@ -8,6 +8,20 @@
     <script src="script.js" defer></script>
 </head>
 <body>
+    <h1>Etch a sketch</h1>
+    <div id="boxes">
+        <label>Number of boxes per side : <input type="text" inputmode="numeric" placeholder="16" list="values"></label>
+        <datalist id="values">
+            <option value="16"></option>
+            <option value="32"></option>
+            <option value="64"></option>
+        </datalist>
+        <button>Change size</button>
+    </div>
+    <button id="reset">Reset</button>
+    <div id="drawingBox">
+
+    </div>
     
 </body>
 </html>

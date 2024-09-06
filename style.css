@@ -1,0 +1,7 @@
+#drawingBox {
+    display: flex;
+    flex-wrap: wrap;
+    width: min(80vh, 80vw);
+    aspect-ratio: 1/1;
+    border: solid 1px black;
+}
