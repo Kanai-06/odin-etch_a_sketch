@@ -25,13 +25,10 @@ function draw(numberBoxes){
             child.style.background = "black";
         });
 
-        child.addEventListener("pointerdown",(e)=>{
-            div.releasePointerCapture(e.pointerId) // <- Important!
+        child.addEventListener("touchenter",(e) => {
             child.style.background = "black";
-        })
-        child.addEventListener("pointerenter",(e)=>{
-            child.style.background = "black";
-        })
+            e.preventDefault();
+        });
     });
 }
 
