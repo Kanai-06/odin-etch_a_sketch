@@ -13,12 +13,18 @@ function draw(numberBoxes){
 
         drawingBox.appendChild(box);
     }
+    
     document.querySelectorAll("#drawingBox div").forEach((child) => {
         child.addEventListener("mouseenter",() => {
             child.style.background = "black";
         });
     });
 
+    document.querySelectorAll("#drawingBox div").forEach((child) => {
+        child.addEventListener("touchenter",() => {
+            child.style.background = "black";
+        });
+    });
 }
 
 document.addEventListener("DOMContentLoaded", draw(16));
