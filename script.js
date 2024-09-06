@@ -27,6 +27,7 @@ function draw(numberBoxes){
 
         child.addEventListener("pointerdown",(e)=>{
             div.releasePointerCapture(e.pointerId) // <- Important!
+            child.style.background = "black";
         })
         child.addEventListener("pointerenter",(e)=>{
             child.style.background = "black";
