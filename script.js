@@ -25,10 +25,10 @@ function draw(numberBoxes){
             child.style.background = "black";
         });
 
-        div.addEventListener("pointerdown",(e)=>{
+        child.addEventListener("pointerdown",(e)=>{
             div.releasePointerCapture(e.pointerId) // <- Important!
         })
-        div.addEventListener("pointerenter",(e)=>{
+        child.addEventListener("pointerenter",(e)=>{
             child.style.background = "black";
         })
     });
