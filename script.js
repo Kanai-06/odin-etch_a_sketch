@@ -51,14 +51,6 @@ document.addEventListener('touchmove', function (e) {
 
 });
 
-onTouchEnter('.area',function(el,e){
-  el.classList.add('hover')
-})
-onTouchLeave('.area',function(el,e){
-  el.classList.remove('hover')
-})
-
-
 function draw(numberBoxes){
     const drawingBox = document.querySelector("#drawingBox");
 
@@ -84,7 +76,7 @@ function draw(numberBoxes){
 
     onTouchEnter("#drawingBox div", function(element,event){
         child.style.background = "black";
-    })
+    });
 }
 
 document.addEventListener("DOMContentLoaded", draw(16));
@@ -111,7 +103,7 @@ document.addEventListener("keypress", (e) => {
 
 function resetBackground(){
     document.querySelectorAll("#drawingBox div").forEach((child) => {
-        child.style.background = "white";
+        el.classList.add('hover');
     });
 }
 
