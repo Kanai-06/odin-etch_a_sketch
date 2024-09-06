@@ -81,11 +81,10 @@ function draw(numberBoxes){
         });
     });
 
-    document.querySelectorAll("#drawingBox div").forEach((child) => {
-        onTouchEnter(child, function(element,event){
-            child.style.background = "black";
-        })
-    });
+
+    onTouchEnter("#drawingBox div", function(element,event){
+        child.style.background = "black";
+    })
 }
 
 document.addEventListener("DOMContentLoaded", draw(16));
