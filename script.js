@@ -1,56 +1,3 @@
-let onTouchLeaveEvents = [];
-let onTouchEnterEvents = [];
-const onTouchEnter = function (selector, fn) {
-    onTouchEnterEvents.push([selector, fn]);
-    return function () {
-        onTouchEnterEvents.slice().map(function (e, i) {
-            if (e[0] === selector && e[1] === fn) {
-                onTouchEnterEvents.splice(1, i);
-            }
-        });
-    };
-};
-
-const onTouchLeave = function (selector, fn) {
-    onTouchLeaveEvents.push([selector, fn]);
-    return function () {
-        onTouchLeaveEvents.slice().map(function (e, i) {
-            if (e[0] === selector && e[1] === fn) {
-                onTouchLeaveEvents.splice(1, i);
-            }
-        });
-    };
-};
-
-let lastTouchLeave;
-let lastTouchEnter;
-document.addEventListener('touchmove', function (e) {
-    var el = document.elementFromPoint(e.touches[0].clientX, e.touches[0].clientY);
-    if (!el) return;
-  
-  onTouchLeaveEvents.map((event) => {
-    if (el!=lastTouchEnter && lastTouchEnter && lastTouchEnter.matches(event[0])) {
-      
-        
-            if (lastTouchEnter !== lastTouchLeave ) {
-                event[1](lastTouchEnter, e);
-        lastTouchLeave = lastTouchEnter;
-        lastTouchEnter = null
-            }
-            
-        }
-    });
-  
-    onTouchEnterEvents.map((event) => {
-        if (el.matches(event[0]) && el!==lastTouchEnter) {
-            lastTouchEnter = el;
-      lastTouchLeave = null;
-      event[1](el, e);
-     }
-    });
-
-});
-
 function draw(numberBoxes){
     const drawingBox = document.querySelector("#drawingBox");
 
@@ -60,23 +7,24 @@ function draw(numberBoxes){
         drawingBox.removeChild(child);
     });
 
+
     for(let i = 0; i < Math.pow(numberBoxes, 2); i++){
         const box = document.createElement("div");
-        box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none;`;
+        box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
 
         drawingBox.appendChild(box);
-    }
-    
-    document.querySelectorAll("#drawingBox div").forEach((child) => {
-        child.addEventListener("mouseenter",() => {
-            child.style.background = "black";
+
+        box.addEventListener("mouseenter",() => {
+            box.style.background = "black";
         });
-    });
 
-
-    onTouchEnter("#drawingBox div", function(element,event){
-        child.style.background = "black";
-    });
+        box.addEventListener("pointerdown",(e)=>{
+            box.releasePointerCapture(e.pointerId); // <- Important!
+        });
+        box.addEventListener("pointerenter",(e)=>{
+            box.style.background = "black";
+        });
+    }
 }
 
 document.addEventListener("DOMContentLoaded", draw(16));
@@ -103,7 +51,7 @@ document.addEventListener("keypress", (e) => {
 
 function resetBackground(){
     document.querySelectorAll("#drawingBox div").forEach((child) => {
-        el.classList.add('hover');
+        child.style.background = "white";
     });
 }
 
