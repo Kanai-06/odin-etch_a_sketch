@@ -10,7 +10,7 @@ function draw(numberBoxes){
 
     for(let i = 0; i < Math.pow(numberBoxes, 2); i++){
         const box = document.createElement("div");
-        box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
+        box.style.cssText = `min-width: ${(drawingBoxWidth/numberBoxes) - 2}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none; border: solid 1px black;`;
 
         drawingBox.appendChild(box);
         
@@ -29,7 +29,7 @@ function draw(numberBoxes){
 
         if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
             box.addEventListener("pointerdown",(e)=>{
-                box.releasePointerCapture(e.pointerId); // <- Important!
+                box.releasePointerCapture(e.pointerId);
             });
             box.addEventListener("pointerenter",(e)=>{
                 box.style.background = "black";
@@ -45,8 +45,8 @@ function changeBoxesNumber(){
     const boxesInput = document.querySelector("#boxes input").value;
     let numberBoxes = boxesInput == '' ? 16 : boxesInput;
 
-    if(!(boxesInput > 0 && boxesInput <= 100)){
-        alert("You must have between 1 and 100 boxes per side");
+    if(!(boxesInput > 0 && boxesInput <= 64)){
+        alert("You must have between 1 and 64 boxes per side");
     } else {
         draw(boxesInput);
     }

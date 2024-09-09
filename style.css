@@ -6,7 +6,3 @@
     border: solid 1px black;
     touch-action: none;
 }
-
-#drawingBox .hover{
-    background: black;
-}
