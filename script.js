@@ -7,6 +7,36 @@ function draw(numberBoxes){
         drawingBox.removeChild(child);
     });
 
+    let mousedown = false;
+    drawingBox.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        mousedown = true;
+        e.target.style.background = backgroundColor;
+    });
+
+    drawingBox.addEventListener("mouseup", () => {mousedown = false;});
+    
+    let backgroundColor = "black";
+
+    const colorPicker = document.querySelector("#colors #colorPicker");
+    const colorMode = document.querySelector("#colors #colorMode");
+    const randomMode = document.querySelector("#colors #randomMode");
+    
+    let randomModeToggle = false;
+
+    colorMode.addEventListener("click", () => {
+        backgroundColor = colorPicker.value;
+        randomModeToggle = false;
+    });
+
+    colorPicker.addEventListener("change", () => {
+        backgroundColor = colorPicker.value;
+        randomModeToggle = false;
+    });
+
+    randomMode.addEventListener("click", () => {
+        randomModeToggle = true;
+    });
 
     for(let i = 0; i < Math.pow(numberBoxes, 2); i++){
         const box = document.createElement("div");
@@ -14,17 +44,13 @@ function draw(numberBoxes){
 
         drawingBox.appendChild(box);
         
-        let mousedown = false;
-        drawingBox.addEventListener("mousedown", (e) => {
-            e.preventDefault();
-            mousedown = true;
-        });
-        drawingBox.addEventListener("mouseup", () => {mousedown = false;});
-        
-        
+
 
         box.addEventListener("mouseover",() => {
-            if(mousedown){box.style.background = "black";}
+            if(randomModeToggle){backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
+            if(mousedown){
+                box.style.background = backgroundColor;
+            }
         });
 
         if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
@@ -32,7 +58,8 @@ function draw(numberBoxes){
                 box.releasePointerCapture(e.pointerId);
             });
             box.addEventListener("pointerenter",(e)=>{
-                box.style.background = "black";
+                if(randomModeToggle){backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
+                box.style.background = backgroundColor;
             });
         }
 
@@ -69,4 +96,4 @@ function resetBackground(){
 
 const reset = document.querySelector("#reset");
 
-reset.addEventListener("click", resetBackground)
+reset.addEventListener("click", resetBackground);
