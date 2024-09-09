@@ -40,7 +40,7 @@ function draw(numberBoxes){
 
     for(let i = 0; i < Math.pow(numberBoxes, 2); i++){
         const box = document.createElement("div");
-        box.style.cssText = `min-width: ${(drawingBoxWidth/numberBoxes) - 2}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none; border: solid 1px black;`;
+        box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
 
         drawingBox.appendChild(box);
         

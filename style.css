@@ -1,3 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Jacquarda+Bastarda+9+Charted&family=Pixelify+Sans:wght@400..700&display=swap');
+
+:root{
+    --ff:"Pixelify Sans", system-ui; 
+}
+
+body {
+    font-size: 62.5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
 #drawingBox {
     display: flex;
     flex-wrap: wrap;
@@ -5,4 +19,32 @@
     aspect-ratio: 1/1;
     border: solid 1px black;
     touch-action: none;
+}
+
+h1{
+    font-family: var(--ff);
+    font-size: 5.6em;
+
+}
+
+label, button {
+    font-family: var(--ff);
+    font-size: 2.3em;
+}
+
+#drawingBox{
+    border-radius: 2px;
+}
+
+#colors {
+    display: flex;
+    gap: 7px;
+    align-items: center;
+}
+
+#colorPicker {
+    border: none;
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
 }
