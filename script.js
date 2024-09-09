@@ -13,17 +13,29 @@ function draw(numberBoxes){
         box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
 
         drawingBox.appendChild(box);
+        
+        let mousedown = false;
+        drawingBox.addEventListener("mousedown", (e) => {
+            e.preventDefault();
+            mousedown = true;
+        });
+        drawingBox.addEventListener("mouseup", () => {mousedown = false;});
+        
+        
 
-        box.addEventListener("mouseenter",() => {
-            box.style.background = "black";
+        box.addEventListener("mouseover",() => {
+            if(mousedown){box.style.background = "black";}
         });
 
-        box.addEventListener("pointerdown",(e)=>{
-            box.releasePointerCapture(e.pointerId); // <- Important!
-        });
-        box.addEventListener("pointerenter",(e)=>{
-            box.style.background = "black";
-        });
+        if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
+            box.addEventListener("pointerdown",(e)=>{
+                box.releasePointerCapture(e.pointerId); // <- Important!
+            });
+            box.addEventListener("pointerenter",(e)=>{
+                box.style.background = "black";
+            });
+        }
+
     }
 }
 
