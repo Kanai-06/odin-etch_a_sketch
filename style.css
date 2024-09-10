@@ -15,7 +15,7 @@ body {
 #drawingBox {
     display: flex;
     flex-wrap: wrap;
-    width: min(80vh, 80vw);
+    width: min(85vh, 85vw);
     aspect-ratio: 1/1;
     border: solid 1px black;
     touch-action: none;
