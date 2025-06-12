@@ -13,10 +13,8 @@ body {
 }
 
 #drawingBox {
-    display: flex;
-    flex-wrap: wrap;
     width: min(85vh, 85vw);
-    aspect-ratio: 1/1;
+    aspect-ratio: 1 / 1;
     border: solid 1px black;
     touch-action: none;
 }
@@ -46,5 +44,5 @@ label, button {
     border: none;
     width: 3em;
     height: 3em;
-    border-radius: 100%;
+    border-radius: 25%;
 }

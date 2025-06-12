@@ -1,9 +1,8 @@
 function draw(numberBoxes){
     const drawingBox = document.querySelector("#drawingBox");
-
     let drawingBoxWidth = drawingBox.clientWidth;
 
-    document.querySelectorAll("#drawingBox div").forEach((child) => {
+    document.querySelectorAll("#drawingBox .col").forEach((child) => {
         drawingBox.removeChild(child);
     });
 
@@ -38,29 +37,36 @@ function draw(numberBoxes){
         randomModeToggle = true;
     });
 
-    for(let i = 0; i < Math.pow(numberBoxes, 2); i++){
-        const box = document.createElement("div");
-        box.style.cssText = `min-width: ${drawingBoxWidth/numberBoxes}px; min-height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
+    for(let i = 0; i < numberBoxes; i++){
+        const col = document.createElement("div");
+        col.classList.add("col");
+        col.style.cssText = `width: ${drawingBoxWidth}px; height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; display: flex; touch-action: none;`;
 
-        drawingBox.appendChild(box);
-        
+        for(let i = 0; i < numberBoxes; i++){
 
+            const box = document.createElement("div");
+            box.style.cssText = `width: ${drawingBoxWidth/numberBoxes}px; height: ${drawingBoxWidth/numberBoxes}px; background: white; flex: none; touch-action: none;`;
 
-        box.addEventListener("mouseover",() => {
-            if(randomModeToggle){backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
-            if(mousedown){
-                box.style.background = backgroundColor;
-            }
-        });
+            col.appendChild(box);
 
-        if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
-            box.addEventListener("pointerdown",(e)=>{
-                box.releasePointerCapture(e.pointerId);
-            });
-            box.addEventListener("pointerenter",(e)=>{
+            box.addEventListener("mouseover",() => {
                 if(randomModeToggle){backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
-                box.style.background = backgroundColor;
+                if(mousedown){
+                    box.style.background = backgroundColor;
+                }
             });
+
+            if(('ontouchstart' in window) || (navigator.maxTouchPoints > 0) || (navigator.msMaxTouchPoints > 0)){
+                box.addEventListener("pointerdown",(e)=>{
+                    box.releasePointerCapture(e.pointerId);
+                });
+                box.addEventListener("pointerenter",(e)=>{
+                    if(randomModeToggle){backgroundColor = `rgb(${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)}, ${Math.floor(Math.random()*256)})`;}
+                    box.style.background = backgroundColor;
+                });
+            }
+
+            drawingBox.appendChild(col);
         }
 
     }
